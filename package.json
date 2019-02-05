@@ -1,0 +1,26 @@
+{
+  "name": "mandatory-uxdesign2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup main.js --file bundle.js --format iife --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GitRall/mandatory-uxdesign2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GitRall/mandatory-uxdesign2/issues"
+  },
+  "homepage": "https://github.com/GitRall/mandatory-uxdesign2#readme",
+  "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
+    "@babel/register": "^7.0.0",
+    "rollup": "^1.1.2"
+  }
+}
