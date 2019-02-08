@@ -6,6 +6,9 @@ body{
   margin: 0;
   padding: 0;
 }
+.scroll-disabled{
+  overflow: hidden;
+}
 main{
   position: relative;
   overflow: hidden;
@@ -14,6 +17,7 @@ main{
   background: #FAFAFA;
 }
 header{
+  position: fixed;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -21,6 +25,7 @@ header{
   background: #AD1457;
   padding: 16px;
   box-sizing: border-box;
+  z-index: 1;
 }
 .header__menu-icon{
   color: #FFF;
@@ -31,7 +36,99 @@ header{
   margin: 0;
   font-size: 2rem;
 }
-
+/* =========================== Section =========================== */
+section{
+  display: flex;
+  flex-direction: column;
+  margin-top: 56px;
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  padding: 16px;
+  box-sizing: border-box;
+}
+.section__start-quiz-btn{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: #AD1457;
+  color: #FFFFFF;
+  font-size: 2rem;
+  padding: 10px 20px 10px 20px;
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}
+.section__start-quiz-btn--hidden{
+  opacity: 0;
+  pointer-events: none;
+}
+.section__question-container{
+  padding: 15px;
+  width: 100%;
+  background: #AD1457;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  /* border-radius: 5px; */
+}
+.section__question{
+  margin: 0;
+  font-size: 1.6rem;
+  color: #FFFFFF;
+}
+.section__answer-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.section__answer-label{
+  position: relative;
+  width: 100%;
+  font-size: 1.6rem;
+  padding-left: 30px;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+.section__answer-input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  opacity: 0.01;
+}
+.section__checkmark{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #AD1457;
+  box-sizing: border-box;
+}
+.section__checkmark-inner{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #AD1457;
+  transform: scale(0);
+  transition: transform 0.2s ease-out;
+}
+.section__answer-input:checked ~ .section__checkmark > .section__checkmark-inner{
+  transform: scale(1);
+}
+/* .section__checkmark-inner--checked{
+  transform: scale(1);
+} */
 /* =========================== Nav =========================== */
 .overlay{
   position: absolute;
@@ -39,23 +136,28 @@ header{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  transition: background-color 0.3s linear;
 }
 .overlay--hidden{
-  background: rgba(0, 0, 0, 0.2);
-  z-index: -1;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
 }
 nav{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: -100%;
   box-sizing: border-box;
   width: calc(100% - 56px);
   height: 100%;
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
   box-shadow: 10px 0 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: left 0.3s ease-out;
+}
+.nav--visible{
+  left: 0;
 }
 .nav__text-container{
   width: 100%;
@@ -90,40 +192,88 @@ nav{
   font-weight: 600;
   padding-left: 16px;
 }
-/* =========================== Right modal =========================== */
-/* .right-modal-overlay{
-  position: absolute;
-  display: flex;
-  justify-content: flex-end;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 1;
-} */
-.right-modal{
-  position: absolute;
+
+/* =========================== stats modal =========================== */
+.stats-modal{
+  position: fixed;
   top: 0;
   right: -100%;
   box-sizing: border-box;
   width: calc(100% - 56px);
   height: 100%;
   background-color: #fff;
-  z-index: 2;
+  z-index: 3;
   box-shadow: -10px 0 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: right 0.3s ease-out;
 }
-.right-modal__title-container{
+.stats-modal--visible{
+  right: 0;
+}
+.stats-modal__title-container{
   display: flex;
   align-items: flex-end;
   width: 100%;
   height: 140px;
   background: #AD1457;
 }
-.right-modal__title{
+.stats-modal__title{
   margin: 0 0 20px 16px;
   font-size: 2rem;
   color: #FFFFFF;
+}
+.stats-modal__stats-container{
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+.stats-modal__stats-title{
+  font-size: 1.6rem;
+  color: #AD1457;
+  margin: 0 0 5px 0;
+}
+.stats-modal__stats{
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+/* =========================== about modal =========================== */
+.about-modal{
+  position: fixed;
+  top: 0;
+  right: -100%;
+  box-sizing: border-box;
+  width: calc(100% - 56px);
+  height: 100%;
+  background-color: #fff;
+  z-index: 3;
+  box-shadow: -10px 0 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: right 0.3s ease-out;
+}
+.about-modal--visible{
+  right: 0;
+}
+.about-modal__title-container{
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 140px;
+  background: #AD1457;
+}
+.about-modal__title{
+  margin: 0 0 20px 16px;
+  font-size: 2rem;
+  color: #FFFFFF;
+}
+.about-modal__text-container{
+  padding: 16px;
+}
+.about-modal__text{
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  word-spacing: 3px;
+  letter-spacing: 1px;
+  color: #616161;
 }
 /* =========================== Media queries =========================== */
 @media (min-width: 500px){

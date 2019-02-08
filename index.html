@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
-    <script type="text/javascript" src="./bundle.js"></script>
+    <script type="text/javascript" src="./bundle.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
@@ -15,6 +16,30 @@
         <i class="material-icons header__menu-icon">menu</i>
         <h1 class="header__title">Quiz Pro</h1>
       </header>
+      <section>
+        <!-- <div class="section__question-wrapper">
+          <div class="section__question-container">
+            <h4 class="section__question">1. What is the air-speed velocity of an unladen swallow?</h4>
+          </div>
+          <div class="section__answer-container">
+            <label class="section__answer-label" for="">
+              <input class="section__answer-input" type="radio" name="" value="">
+              <span class="section__checkmark">
+                <span class="section__checkmark-inner"></span>
+              </span>
+              eyyygfdagfdgfdagfdfd gfdg fdagfda gfdagf dgfdg fdgfdag fdagfd  gfda g
+            </label>
+            <label class="section__answer-label" for="">
+              <input class="section__answer-input" type="radio" name="" value="">
+              <span class="section__checkmark">
+                <span class="section__checkmark-inner"></span>
+              </span>
+              eyyygfdagfdgfdagfdfd gfdg fdagfda gfdagf dgfdg fdgfdag fdagfd  gfda ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+            </label>
+          </div>
+        </div> -->
+        <button class="section__start-quiz-btn" type="button" name="button">Start Quiz</button>
+      </section>
       <div class="overlay overlay--hidden">
         <nav>
           <div class="nav__text-container">
@@ -22,14 +47,32 @@
             <h3 class="nav__subtext">Just an ordinary quiz for pro quizzers</h3>
           </div>
           <div class="nav__menu-container">
-            <button class="nav__menu-btn" type="button" name="button">Game screen</button>
-            <button class="nav__menu-btn" type="button" name="button">Stats</button>
-            <button class="nav__menu-btn" type="button" name="button">About Quiz Pro</button>
+            <button class="nav__menu-btn nav__menu-game-btn" type="button" name="button">Game screen</button>
+            <button class="nav__menu-btn nav__menu-stats-btn" type="button" name="button">Stats</button>
+            <button class="nav__menu-btn nav__menu-about-btn" type="button" name="button">About Quiz Pro</button>
           </div>
         </nav>
-        <div class="right-modal">
-          <div class="right-modal__title-container">
-            <h2 class="right-modal__title">Stats</h2>
+        <div class="stats-modal">
+          <div class="stats-modal__title-container">
+            <h2 class="stats-modal__title">Stats</h2>
+          </div>
+          <div class="stats-modal__stats-container">
+            <h5 class="stats-modal__stats-title">GAMES PLAYED</h5>
+            <span class="stats-modal__stats stats-modal__games-played"></span>
+            <h5 class="stats-modal__stats-title">CORRECT ANSWERS</h5>
+            <span class="stats-modal__stats stats-modal__correct-answers"></span>
+            <h5 class="stats-modal__stats-title">INCORRECT ANSWERS</h5>
+            <span class="stats-modal__stats stats-modal__incorrect-answers"></span>
+            <h5 class="stats-modal__stats-title">CORRECT PERCENTAGE</h5>
+            <span class="stats-modal__stats stats-modal__correct-percentage"></span>
+          </div>
+        </div>
+        <div class="about-modal">
+          <div class="about-modal__title-container">
+            <h2 class="about-modal__title">About Quiz Pro</h2>
+          </div>
+          <div class="about-modal__text-container">
+            <p class="about-modal__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
         </div>
       </div>
