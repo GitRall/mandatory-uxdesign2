@@ -1,10 +1,11 @@
 export default {
-  overlay: null,
-  navModal: null,
-  statsModal: null,
-  aboutModal: null,
-  section: null,
-  statsElements: null,
+  // overlay: null,
+  // navModal: null,
+  // statsModal: null,
+  // aboutModal: null,
+  // section: null,
+  // statsElements: null,
+  // dialogModalText: null,
 
   init: function(overlay, navModal, statsModal, aboutModal, section){
     this.overlay = overlay;
@@ -13,6 +14,8 @@ export default {
     this.aboutModal = aboutModal;
     this.section = section;
     this.statsElements = document.querySelectorAll('.stats-modal__stats');
+    this.dialogModalText = document.querySelector('.modal-dialog__text');
+    this.overlayModal = document.querySelector('.overlay-modal');
   },
   hideModals: function(){
     this.overlay.classList.add('overlay--hidden');
@@ -38,6 +41,10 @@ export default {
   hideStartButton: function(startButton){
     startButton.classList.add('section__start-quiz-btn--hidden');
     startButton.tabIndex = '-1';
+  },
+  showStartButton: function(startButton){
+    startButton.classList.remove('section__start-quiz-btn--hidden');
+    startButton.tabIndex = '0';
   },
   renderStats: function(stats){
     for(let element of this.statsElements){
@@ -65,13 +72,14 @@ export default {
     questionText.classList.add('section__question');
 
     questionText.innerHTML = obj.question;
+
     this.section.appendChild(questionWrapper);
     questionWrapper.appendChild(questionContainer);
     questionContainer.appendChild(questionText);
 
     let answerContainer = document.createElement('div');
     questionWrapper.appendChild(answerContainer);
-    console.log(obj)
+
     for(let answer of obj.answers){
       let answerLabel = document.createElement('label');
       let answerInput = document.createElement('input');
@@ -92,7 +100,22 @@ export default {
       answerLabel.appendChild(answerInput);
       answerLabel.appendChild(checkmark);
       checkmark.appendChild(checkmarkInner);
-
     }
   },
+  renderResultButton: function(){
+    let resultButton = document.createElement('button');
+    resultButton.innerHTML = 'DONE';
+    resultButton.classList.add('section__result-btn');
+    this.section.appendChild(resultButton);
+    return resultButton;
+  },
+  showModalDialog: function(correct, amount){
+    this.dialogModalText.textContent = 'You Answered ' + correct + '/' + amount + ' questions correct!';
+    this.overlayModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  },
+  hideModalDialog: function(){
+    this.overlayModal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
 }

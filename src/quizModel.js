@@ -5,15 +5,30 @@ export default {
     incorrect: 0,
     percentage: 0,
   },
+  getStats: function(){
+    return this.stats;
+  },
+  updateStats: function(correct, incorrect){
+    this.stats.games++;
+    this.stats.correct += correct;
+    this.stats.incorrect += incorrect;
+    let total = this.stats.correct + this.stats.incorrect;
+    this.calcPercentage(total);
+  },
+  calcPercentage: function(total){
+    let percent = this.stats.correct / total;
+    this.stats.percentage = Math.floor(percent * 100);
+  },
+  questionAmount: 10,
+  getQuestionAmount: function(){
+    return this.questionAmount;
+  },
   currentQuestions: null,
   getCurrentQuestions: function(){
     return this.currentQuestions;
   },
-  getStats: function(){
-    return this.stats;
-  },
   getQuestions: function(){
-    return axios.get('https://opentdb.com/api.php?amount=10')
+    return axios.get('https://opentdb.com/api.php?amount=' + this.questionAmount)
     .then((response) => {
       this.currentQuestions = response.data.results;
       return response.data.results;
@@ -41,5 +56,23 @@ export default {
       arr.splice(index, 1);
     }
     return resultArray;
+  },
+  setDataSet: function(element){
+    element.dataset.checked = 'checked';
+  },
+  checkResult: function(arr){
+    let correct = 0;
+    let incorrect = 0;
+    let currentQuestions = this.getCurrentQuestions();
+    for(let i = 0; i < this.questionAmount; i++){
+      if(arr[i] === currentQuestions[i].correct_answer){
+        correct++;
+      }
+      else{
+        incorrect++;
+      }
+    }
+    this.updateStats(correct, incorrect);
+    return correct;
   },
 }

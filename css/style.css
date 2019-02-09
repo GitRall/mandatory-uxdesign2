@@ -12,7 +12,7 @@ body{
 main{
   position: relative;
   overflow: hidden;
-  width: 360px;
+  width: 100%;
   min-height: 100vh;
   background: #FAFAFA;
 }
@@ -68,8 +68,8 @@ section{
   width: 100%;
   background: #AD1457;
   box-sizing: border-box;
-  margin-bottom: 10px;
-  /* border-radius: 5px; */
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 .section__question{
   margin: 0;
@@ -99,7 +99,7 @@ section{
   margin: 0;
   width: 20px;
   height: 20px;
-  z-index: 1;
+  z-index: 0;
   opacity: 0.01;
 }
 .section__checkmark{
@@ -126,10 +126,15 @@ section{
 .section__answer-input:checked ~ .section__checkmark > .section__checkmark-inner{
   transform: scale(1);
 }
-/* .section__checkmark-inner--checked{
-  transform: scale(1);
-} */
-/* =========================== Nav =========================== */
+.section__result-btn{
+  font-size: 2rem;
+  padding: 10px 0 10px 0;
+  background: #AD1457;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+}
+/* =========================== Overlays =========================== */
 .overlay{
   position: absolute;
   top: 0;
@@ -144,6 +149,7 @@ section{
   background-color: rgba(0, 0, 0, 0);
   pointer-events: none;
 }
+/* =========================== Nav =========================== */
 nav{
   position: fixed;
   top: 0;
@@ -274,6 +280,41 @@ nav{
   word-spacing: 3px;
   letter-spacing: 1px;
   color: #616161;
+}
+
+/* =========================== about modal =========================== */
+.modal-dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  background: #FFFFFF;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.modal-dialog__title{
+  margin: 20px 0 0 0;
+  padding: 0 24px 0 24px;
+  font-size: 2rem;
+  color: #AD1457;
+}
+.modal-dialog__text{
+  margin: 20px 0 0 0;
+  padding: 0 24px 28px 24px;
+  font-size: 1.6rem;
+}
+.modal-dialog__btn-container{
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 0 8px 24px;
+}
+.modal-dialog__btn{
+  font-size: 1.4rem;
+  border: none;
+  background: none;
+  color: #AD1457;
+  margin-right: 8px;
+  padding: 10px;
 }
 /* =========================== Media queries =========================== */
 @media (min-width: 500px){
