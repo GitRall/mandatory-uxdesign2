@@ -57,15 +57,19 @@ export default {
     }
     return resultArray;
   },
-  setDataSet: function(element){
+  setDataChecked: function(element){
     element.dataset.checked = 'checked';
   },
   checkResult: function(arr){
     let correct = 0;
     let incorrect = 0;
     let currentQuestions = this.getCurrentQuestions();
+    let test = 'P.E.K.K.A&#039;s Playhouse';
+
     for(let i = 0; i < this.questionAmount; i++){
-      if(arr[i] === currentQuestions[i].correct_answer){
+      let doc = new DOMParser().parseFromString(currentQuestions[i].correct_answer, "text/html");
+      let correctParsed = doc.documentElement.textContent;
+      if(arr[i] === correctParsed){
         correct++;
       }
       else{
@@ -75,4 +79,11 @@ export default {
     this.updateStats(correct, incorrect);
     return correct;
   },
+  titleMessage: function(correct, amount){
+    let percent = correct / amount;
+    if(percent <= 0.3) return 'You can do better!';
+    else if(percent > 0.3 && percent <= 0.6) return 'Average';
+    else if(percent > 0.6 && percent < 1) return 'Well done!'
+    else return 'Perfect!';
+  }
 }

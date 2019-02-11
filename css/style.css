@@ -66,7 +66,7 @@ section{
 .section__question-container{
   padding: 15px;
   width: 100%;
-  background: #AD1457;
+  background: #EEE;
   box-sizing: border-box;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -74,7 +74,7 @@ section{
 .section__question{
   margin: 0;
   font-size: 1.6rem;
-  color: #FFFFFF;
+  color: #000;
 }
 .section__answer-container{
   display: flex;
@@ -112,7 +112,7 @@ section{
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #AD1457;
+  border: 2px solid #616161;
   box-sizing: border-box;
 }
 .section__checkmark-inner{
@@ -125,6 +125,9 @@ section{
 }
 .section__answer-input:checked ~ .section__checkmark > .section__checkmark-inner{
   transform: scale(1);
+}
+.section__answer-input:checked ~ .section__checkmark{
+  border: 2px solid #AD1457;
 }
 .section__result-btn{
   font-size: 2rem;

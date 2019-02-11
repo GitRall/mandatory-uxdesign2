@@ -14,6 +14,7 @@ export default {
     this.aboutModal = aboutModal;
     this.section = section;
     this.statsElements = document.querySelectorAll('.stats-modal__stats');
+    this.dialogModalTitle = document.querySelector('.modal-dialog__title');
     this.dialogModalText = document.querySelector('.modal-dialog__text');
     this.overlayModal = document.querySelector('.overlay-modal');
   },
@@ -109,7 +110,8 @@ export default {
     this.section.appendChild(resultButton);
     return resultButton;
   },
-  showModalDialog: function(correct, amount){
+  showModalDialog: function(correct, amount, title){
+    this.dialogModalTitle.textContent = title;
     this.dialogModalText.textContent = 'You Answered ' + correct + '/' + amount + ' questions correct!';
     this.overlayModal.style.display = 'block';
     document.body.style.overflow = 'hidden';

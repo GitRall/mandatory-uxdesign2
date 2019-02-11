@@ -68,7 +68,7 @@ export function quizFunc(){
 
       for(let input of answerInputs){
         input.addEventListener('click', function(e){
-          quizModel.setDataSet(e.target.parentNode.parentNode);
+          quizModel.setDataChecked(e.target.parentNode.parentNode);
         })
       }
 
@@ -89,7 +89,8 @@ export function quizFunc(){
         let correctAnswers = quizModel.checkResult(resultArr);
         quizView.renderStats(quizModel.getStats());
         let questionAmount = quizModel.getQuestionAmount();
-        quizView.showModalDialog(correctAnswers, questionAmount);
+        let titleMessage = quizModel.titleMessage(correctAnswers, questionAmount);
+        quizView.showModalDialog(correctAnswers, questionAmount, titleMessage);
       })
     })
   }
