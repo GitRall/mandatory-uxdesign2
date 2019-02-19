@@ -64,8 +64,6 @@ export default {
     let correct = 0;
     let incorrect = 0;
     let currentQuestions = this.getCurrentQuestions();
-    let test = 'P.E.K.K.A&#039;s Playhouse';
-
     for(let i = 0; i < this.questionAmount; i++){
       let doc = new DOMParser().parseFromString(currentQuestions[i].correct_answer, "text/html");
       let correctParsed = doc.documentElement.textContent;
@@ -85,5 +83,33 @@ export default {
     else if(percent > 0.3 && percent <= 0.6) return 'Average';
     else if(percent > 0.6 && percent < 1) return 'Well done!'
     else return 'Perfect!';
-  }
+  },
+  setTabMinus: function(...args){
+    for(let element of args){
+      if(element === null) continue;
+      if(element.length > 0){
+        let elementArray = Array.from(element);
+        for(let item of elementArray){
+          item.tabIndex = '-1';
+        }
+      }
+      else{
+        element.tabIndex = '-1';
+      }
+    }
+  },
+  setTabZero: function(...args){
+    for(let element of args){
+      if(element === null) continue;
+      if(element.length > 0){
+        let elementArray = Array.from(element);
+        for(let item of elementArray){
+          item.tabIndex = '0';
+        }
+      }
+      else{
+        element.tabIndex = '0';
+      }
+    }
+  },
 }

@@ -13,30 +13,31 @@
   <body>
     <main>
       <header>
-        <i class="material-icons header__menu-icon">menu</i>
+        <i aria-label="menu" class="material-icons header__menu-icon" tabindex="0">menu</i>
         <h1 class="header__title">Quiz Pro</h1>
       </header>
       <section>
 
       </section>
       <button class="section__start-quiz-btn" type="button" name="button">Start Quiz</button>
-      <div class="overlay overlay-drawer overlay--hidden">
+      <div aria-label="Game screen" class="overlay overlay-drawer overlay--hidden">
         <nav>
           <div class="nav__text-container">
             <h2 class="nav__title">Quiz Pro</h2>
             <h3 class="nav__subtext">Just an ordinary quiz for pro quizzers</h3>
           </div>
           <div class="nav__menu-container">
-            <button class="nav__menu-btn nav__menu-game-btn" type="button" name="button">Game screen</button>
-            <button class="nav__menu-btn nav__menu-stats-btn" type="button" name="button">Stats</button>
-            <button class="nav__menu-btn nav__menu-about-btn" type="button" name="button">About Quiz Pro</button>
+            <button class="nav__menu-btn nav__menu-game-btn" type="button" name="button" tabindex="-1">Game screen</button>
+            <button class="nav__menu-btn nav__menu-stats-btn" type="button" name="button" tabindex="-1">Stats</button>
+            <button class="nav__menu-btn nav__menu-about-btn" type="button" name="button" tabindex="-1">About Quiz Pro</button>
           </div>
         </nav>
         <div class="stats-modal">
           <div class="stats-modal__title-container">
+            <i aria-label="menu" class="material-icons icon-back stats-modal__icon-back">keyboard_arrow_right</i>
             <h2 class="stats-modal__title">Stats</h2>
           </div>
-          <div class="stats-modal__stats-container">
+          <div tabindex="-1" class="stats-modal__stats-container">
             <h5 class="stats-modal__stats-title">GAMES PLAYED</h5>
             <span class="stats-modal__stats stats-modal__games-played"></span>
             <h5 class="stats-modal__stats-title">CORRECT ANSWERS</h5>
@@ -49,6 +50,7 @@
         </div>
         <div class="about-modal">
           <div class="about-modal__title-container">
+            <i aria-label="menu" class="material-icons icon-back about-modal__icon-back">keyboard_arrow_right</i>
             <h2 class="about-modal__title">About Quiz Pro</h2>
           </div>
           <div class="about-modal__text-container">

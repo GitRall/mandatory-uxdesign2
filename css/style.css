@@ -14,7 +14,7 @@ main{
   overflow: hidden;
   width: 100%;
   min-height: 100vh;
-  background: #FAFAFA;
+  background: #fff;
 }
 header{
   position: fixed;
@@ -114,6 +114,11 @@ section{
   border-radius: 50%;
   border: 2px solid #616161;
   box-sizing: border-box;
+  transition: transform 0.2s ease-in-out;
+}
+.section__answer-input:focus ~ .section__checkmark{
+  border: 2px solid #AD1457;
+  transform: scale(1.2);
 }
 .section__checkmark-inner{
   width: 10px;
@@ -154,7 +159,7 @@ section{
 }
 /* =========================== Nav =========================== */
 nav{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: -100%;
   box-sizing: border-box;
@@ -204,7 +209,7 @@ nav{
 
 /* =========================== stats modal =========================== */
 .stats-modal{
-  position: fixed;
+  position: absolute;
   top: 0;
   right: -100%;
   box-sizing: border-box;
@@ -220,7 +225,8 @@ nav{
 }
 .stats-modal__title-container{
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 140px;
   background: #AD1457;
@@ -234,6 +240,8 @@ nav{
   display: flex;
   flex-direction: column;
   padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .stats-modal__stats-title{
   font-size: 1.6rem;
@@ -248,7 +256,8 @@ nav{
 
 /* =========================== about modal =========================== */
 .about-modal{
-  position: fixed;
+  position: absolute;
+  overflow: scroll;
   top: 0;
   right: -100%;
   box-sizing: border-box;
@@ -264,7 +273,8 @@ nav{
 }
 .about-modal__title-container{
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 140px;
   background: #AD1457;
@@ -284,8 +294,14 @@ nav{
   letter-spacing: 1px;
   color: #616161;
 }
+.icon-back{
+  font-size: 3rem;
+  align-self: flex-end;
+  color: #FFF;
+  margin: 16px 16px 0 0;
+}
 
-/* =========================== about modal =========================== */
+/* =========================== modal dialog =========================== */
 .modal-dialog{
   position: fixed;
   top: 50%;
