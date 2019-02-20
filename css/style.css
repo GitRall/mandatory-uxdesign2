@@ -159,7 +159,7 @@ section{
 }
 /* =========================== Nav =========================== */
 nav{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: -100%;
   box-sizing: border-box;
@@ -209,7 +209,7 @@ nav{
 
 /* =========================== stats modal =========================== */
 .stats-modal{
-  position: absolute;
+  position: fixed;
   top: 0;
   right: -100%;
   box-sizing: border-box;
@@ -256,7 +256,7 @@ nav{
 
 /* =========================== about modal =========================== */
 .about-modal{
-  position: absolute;
+  position: fixed;
   overflow: scroll;
   top: 0;
   right: -100%;

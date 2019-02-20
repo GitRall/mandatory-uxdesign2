@@ -9,9 +9,7 @@ export function quizFunc(){
   const overlay = document.querySelector('.overlay-drawer');
   const nav = document.querySelector('nav');
   const statsModal = document.querySelector('.stats-modal');
-  const statsContainer = document.querySelector('.stats-modal__stats-container');
   const aboutModal = document.querySelector('.about-modal');
-  const aboutModalText = document.querySelector('.about-modal__text');
   const startQuizButton = document.querySelector('.section__start-quiz-btn');
   const section = document.querySelector('section');
   const dialogModalButtons = document.querySelectorAll('.modal-dialog__btn');
@@ -31,7 +29,7 @@ export function quizFunc(){
     let quizInputs = document.querySelectorAll('.section__answer-input');
     let resultButton = document.querySelector('.section__result-btn');
     quizModel.setTabZero(menuIcon, startQuizButton, resultButton, quizInputs, questions);
-    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, statsContainer, aboutModalText);
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
     quizView.hideModals();
   }
 
@@ -76,7 +74,7 @@ export function quizFunc(){
   });
 
   statsButton.addEventListener('click', function(e){
-    quizModel.setTabZero(statsBackArrow, statsContainer);
+    quizModel.setTabZero(statsBackArrow);
     quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
     quizView.hideNavModal();
     quizView.showStatsModal();
@@ -87,9 +85,12 @@ export function quizFunc(){
   statsModal.addEventListener('click', function(e){
     e.stopPropagation();
   });
+  statsModal.addEventListener('keydown', function(e){
+    e.stopPropagation();
+  });
 
   aboutButton.addEventListener('click', function(e){
-    quizModel.setTabZero(aboutBackArrow, aboutModalText);
+    quizModel.setTabZero(aboutBackArrow);
     quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
     quizView.hideNavModal();
     quizView.showAboutModal();
@@ -180,7 +181,7 @@ export function quizFunc(){
 
   for(let backBtn of modalBackArrows){
     backBtn.addEventListener('click', function(e){
-      quizModel.setTabMinus(statsBackArrow, aboutBackArrow, statsContainer, aboutModalText);
+      quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
       quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
       // gameScreenButton.focus();
       quizView.hideModals();
@@ -189,7 +190,7 @@ export function quizFunc(){
     backBtn.addEventListener('keydown', function(e){
       e.stopPropagation();
       if(e.keyCode === 13){
-        quizModel.setTabMinus(statsBackArrow, aboutBackArrow, statsContainer, aboutModalText);
+        quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
         quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
         // gameScreenButton.focus();
         quizView.hideModals();
@@ -197,7 +198,4 @@ export function quizFunc(){
       }
     })
   }
-  statsModal.addEventListener('keydown', function(e){
-    e.stopPropagation();
-  })
 }

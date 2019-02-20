@@ -22,7 +22,9 @@ export default {
     this.overlay.classList.add('overlay--hidden');
     this.navModal.classList.remove('nav--visible');
     this.statsModal.classList.remove('stats-modal--visible');
+    this.statsModal.setAttribute('aria-live', 'off');
     this.aboutModal.classList.remove('about-modal--visible');
+    this.aboutModal.setAttribute('aria-live', 'off');
     document.body.style.overflow = '';
   },
   showNavModal: function(){
@@ -35,9 +37,11 @@ export default {
   },
   showStatsModal: function(){
     this.statsModal.classList.add('stats-modal--visible');
+    this.statsModal.setAttribute('aria-live', 'polite');
   },
   showAboutModal: function(){
     this.aboutModal.classList.add('about-modal--visible');
+    this.aboutModal.setAttribute('aria-live', 'polite');
   },
   hideStartButton: function(startButton){
     startButton.classList.add('section__start-quiz-btn--hidden');
