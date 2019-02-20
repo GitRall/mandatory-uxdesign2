@@ -183,7 +183,6 @@ export function quizFunc(){
     backBtn.addEventListener('click', function(e){
       quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
       quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
-      // gameScreenButton.focus();
       quizView.hideModals();
       quizView.showNavModal();
     })
@@ -192,7 +191,6 @@ export function quizFunc(){
       if(e.keyCode === 13){
         quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
         quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
-        // gameScreenButton.focus();
         quizView.hideModals();
         quizView.showNavModal();
       }

@@ -85,6 +85,7 @@ export default {
     else return 'Perfect!';
   },
   setTabMinus: function(...args){
+    console.log(args);
     for(let element of args){
       if(element === null) continue;
       if(element.length > 0){
@@ -99,6 +100,7 @@ export default {
     }
   },
   setTabZero: function(...args){
+    console.log(args);
     for(let element of args){
       if(element === null) continue;
       if(element.length > 0){

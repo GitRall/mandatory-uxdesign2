@@ -1,12 +1,4 @@
 export default {
-  // overlay: null,
-  // navModal: null,
-  // statsModal: null,
-  // aboutModal: null,
-  // section: null,
-  // statsElements: null,
-  // dialogModalText: null,
-
   init: function(overlay, navModal, statsModal, aboutModal, section){
     this.overlay = overlay;
     this.navModal = navModal;
@@ -17,14 +9,16 @@ export default {
     this.dialogModalTitle = document.querySelector('.modal-dialog__title');
     this.dialogModalText = document.querySelector('.modal-dialog__text');
     this.overlayModal = document.querySelector('.overlay-modal');
+    this.statsContainer = document.querySelector('.stats-modal__stats-container');
+    this.aboutText = document.querySelector('.about-modal__text');
   },
   hideModals: function(){
     this.overlay.classList.add('overlay--hidden');
     this.navModal.classList.remove('nav--visible');
     this.statsModal.classList.remove('stats-modal--visible');
-    this.statsModal.setAttribute('aria-live', 'off');
+    this.statsContainer.setAttribute('aria-live', 'off');
     this.aboutModal.classList.remove('about-modal--visible');
-    this.aboutModal.setAttribute('aria-live', 'off');
+    this.aboutText.setAttribute('aria-live', 'off');
     document.body.style.overflow = '';
   },
   showNavModal: function(){
@@ -37,11 +31,11 @@ export default {
   },
   showStatsModal: function(){
     this.statsModal.classList.add('stats-modal--visible');
-    this.statsModal.setAttribute('aria-live', 'polite');
+    this.statsContainer.setAttribute('aria-live', 'polite');
   },
   showAboutModal: function(){
     this.aboutModal.classList.add('about-modal--visible');
-    this.aboutModal.setAttribute('aria-live', 'polite');
+    this.aboutText.setAttribute('aria-live', 'polite');
   },
   hideStartButton: function(startButton){
     startButton.classList.add('section__start-quiz-btn--hidden');
