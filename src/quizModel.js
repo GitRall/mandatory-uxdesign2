@@ -19,17 +19,19 @@ export default {
     let percent = this.stats.correct / total;
     this.stats.percentage = Math.floor(percent * 100);
   },
-  questionAmount: 10,
+  questionAmount: 5,
   getQuestionAmount: function(){
     return this.questionAmount;
   },
+  difficulty: '',
   currentQuestions: null,
   getCurrentQuestions: function(){
     return this.currentQuestions;
   },
   getQuestions: function(){
-    return axios.get('https://opentdb.com/api.php?amount=' + this.questionAmount)
+    return axios.get('https://opentdb.com/api.php?amount=' + this.questionAmount + this.difficulty)
     .then((response) => {
+      console.log(response);
       this.currentQuestions = response.data.results;
       return response.data.results;
     })
@@ -87,7 +89,8 @@ export default {
   setTabMinus: function(...args){
     for(let element of args){
       if(element === null) continue;
-      if(element.length > 0){
+      let nodeListCheck = NodeList.prototype.isPrototypeOf(element);
+      if(nodeListCheck){
         let elementArray = Array.from(element);
         for(let item of elementArray){
           item.tabIndex = '-1';
@@ -101,7 +104,8 @@ export default {
   setTabZero: function(...args){
     for(let element of args){
       if(element === null) continue;
-      if(element.length > 0){
+      let nodeListCheck = NodeList.prototype.isPrototypeOf(element);
+      if(nodeListCheck){
         let elementArray = Array.from(element);
         for(let item of elementArray){
           item.tabIndex = '0';

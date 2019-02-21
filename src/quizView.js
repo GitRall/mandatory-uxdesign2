@@ -1,16 +1,18 @@
 export default {
-  init: function(overlay, navModal, statsModal, aboutModal, section){
+  init: function(overlay, navModal, statsModal, aboutModal, settingsModal, section){
     this.overlay = overlay;
     this.navModal = navModal;
     this.statsModal = statsModal;
     this.aboutModal = aboutModal;
+    this.settingsModal = settingsModal;
     this.section = section;
     this.statsElements = document.querySelectorAll('.stats-modal__stats');
     this.dialogModalTitle = document.querySelector('.modal-dialog__title');
     this.dialogModalText = document.querySelector('.modal-dialog__text');
     this.overlayModal = document.querySelector('.overlay-modal');
     this.statsContainer = document.querySelector('.stats-modal__stats-container');
-    this.aboutText = document.querySelector('.about-modal__text');
+    this.aboutContainer = document.querySelector('.about-modal__text-container');
+    this.settingsContainer = document.querySelector('.settings-modal__content-container');
   },
   hideModals: function(){
     this.overlay.classList.add('overlay--hidden');
@@ -18,7 +20,9 @@ export default {
     this.statsModal.classList.remove('stats-modal--visible');
     this.statsContainer.setAttribute('aria-live', 'off');
     this.aboutModal.classList.remove('about-modal--visible');
-    this.aboutText.setAttribute('aria-live', 'off');
+    this.aboutContainer.setAttribute('aria-live', 'off');
+    this.settingsModal.classList.remove('settings-modal--visible');
+    this.settingsContainer.setAttribute('aria-live', 'off');
   },
   showNavModal: function(){
     this.overlay.classList.remove('overlay--hidden');
@@ -33,7 +37,11 @@ export default {
   },
   showAboutModal: function(){
     this.aboutModal.classList.add('about-modal--visible');
-    this.aboutText.setAttribute('aria-live', 'polite');
+    this.aboutContainer.setAttribute('aria-live', 'polite');
+  },
+  showSettingsModal: function(){
+    this.settingsModal.classList.add('settings-modal--visible');
+    this.settingsContainer.setAttribute('aria-live', 'polite');
   },
   hideStartButton: function(startButton){
     startButton.classList.add('section__start-quiz-btn--hidden');
@@ -109,9 +117,11 @@ export default {
   showModalDialog: function(correct, amount, title){
     this.dialogModalTitle.textContent = title;
     this.dialogModalText.textContent = 'You Answered ' + correct + '/' + amount + ' questions correct!';
+    this.dialogModalText.setAttribute('aria-live', 'polite');
     this.overlayModal.style.display = 'block';
   },
   hideModalDialog: function(){
+    this.dialogModalText.setAttribute('aria-live', 'off');
     this.overlayModal.style.display = 'none';
   }
 }

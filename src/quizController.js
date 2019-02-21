@@ -6,19 +6,23 @@ export function quizFunc(){
   const gameScreenButton = document.querySelector('.nav__menu-game-btn');
   const statsButton = document.querySelector('.nav__menu-stats-btn');
   const aboutButton = document.querySelector('.nav__menu-about-btn');
+  const settingsButton = document.querySelector('.nav__menu-settings-btn');
   const overlay = document.querySelector('.overlay-drawer');
   const nav = document.querySelector('nav');
   const statsModal = document.querySelector('.stats-modal');
   const aboutModal = document.querySelector('.about-modal');
+  const settingsModal = document.querySelector('.settings-modal');
   const startQuizButton = document.querySelector('.section__start-quiz-btn');
   const section = document.querySelector('section');
   const dialogModalButtons = document.querySelectorAll('.modal-dialog__btn');
   const modalBackArrows = document.querySelectorAll('.icon-back');
   const statsBackArrow = document.querySelector('.stats-modal__icon-back');
   const aboutBackArrow = document.querySelector('.about-modal__icon-back');
-
+  const settingsBackArrow = document.querySelector('.settings-modal__icon-back');
+  const settingsQuestions = document.querySelector('.settings-modal__questions-input');
+  const settingsDifficulty = document.querySelector('.settings-modal__difficulty-selector');
   function init(){
-    quizView.init(overlay, nav, statsModal, aboutModal, section);
+    quizView.init(overlay, nav, statsModal, aboutModal, settingsModal, section);
     quizView.renderStats(quizModel.getStats());
   };
 
@@ -29,7 +33,7 @@ export function quizFunc(){
     let quizInputs = document.querySelectorAll('.section__answer-input');
     let resultButton = document.querySelector('.section__result-btn');
     quizModel.setTabZero(menuIcon, startQuizButton, resultButton, quizInputs, questions);
-    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, settingsButton, statsBackArrow, aboutBackArrow, settingsBackArrow, settingsQuestions, settingsDifficulty);
     quizView.hideModals();
   };
 
@@ -37,7 +41,7 @@ export function quizFunc(){
     let questions = document.querySelectorAll('.section__question');
     let quizInputs = document.querySelectorAll('.section__answer-input');
     let resultButton = document.querySelector('.section__result-btn');
-    quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
+    quizModel.setTabZero(gameScreenButton, statsButton, aboutButton, settingsButton);
     quizModel.setTabMinus(menuIcon, startQuizButton, resultButton, quizInputs, questions);
     quizView.showNavModal();
   });
@@ -47,18 +51,13 @@ export function quizFunc(){
       let questions = document.querySelectorAll('.section__question');
       let quizInputs = document.querySelectorAll('.section__answer-input');
       let resultButton = document.querySelector('.section__result-btn');
-      quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
+      quizModel.setTabZero(gameScreenButton, statsButton, aboutButton, settingsButton);
       quizModel.setTabMinus(menuIcon, startQuizButton, resultButton, quizInputs, questions);
       quizView.showNavModal();
     }
   });
 
   overlay.addEventListener('click', hideModals);
-  overlay.addEventListener('keydown', function(e){
-    if(e.keyCode === 13){
-      hideModals();
-    };
-  });
 
   nav.addEventListener('click', function(e){
     e.stopPropagation();
@@ -69,12 +68,12 @@ export function quizFunc(){
     let quizInputs = document.querySelectorAll('.section__answer-input');
     let resultButton = document.querySelector('.section__result-btn');
     quizModel.setTabZero(menuIcon, startQuizButton, resultButton, quizInputs, questions);
-    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, settingsButton);
     quizView.hideModals();
   });
 
   statsButton.addEventListener('click', function(e){
-    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, settingsButton);
     new Promise ((resolve, reject) => {
       quizView.hideNavModal();
       quizView.showStatsModal();
@@ -97,7 +96,7 @@ export function quizFunc(){
   });
 
   aboutButton.addEventListener('click', function(e){
-    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, settingsButton);
     new Promise ((resolve, reject) => {
       quizView.hideNavModal();
       quizView.showAboutModal();
@@ -115,6 +114,20 @@ export function quizFunc(){
   aboutModal.addEventListener('click', function(e){
     e.stopPropagation();
   });
+
+  settingsButton.addEventListener('click', function(e){
+    quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton, settingsButton);
+    new Promise ((resolve, reject) => {
+      quizView.hideNavModal();
+      quizView.showSettingsModal();
+      setTimeout(() => {
+        resolve();
+      }, 300);
+    })
+    .then(() => {
+      quizModel.setTabZero(settingsBackArrow, settingsQuestions, settingsDifficulty);
+    })
+  })
 
   startQuizButton.addEventListener('click', startQuiz);
 
@@ -194,19 +207,31 @@ export function quizFunc(){
 
   for(let backBtn of modalBackArrows){
     backBtn.addEventListener('click', function(e){
-      quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
-      quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
+      quizModel.setTabMinus(statsBackArrow, aboutBackArrow, settingsBackArrow, settingsQuestions, settingsDifficulty);
+      quizModel.setTabZero(gameScreenButton, statsButton, aboutButton, settingsButton);
       quizView.hideModals();
       quizView.showNavModal();
     })
     backBtn.addEventListener('keydown', function(e){
       e.stopPropagation();
       if(e.keyCode === 13){
-        quizModel.setTabMinus(statsBackArrow, aboutBackArrow);
-        quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
+        quizModel.setTabMinus(statsBackArrow, aboutBackArrow, settingsBackArrow, settingsQuestions, settingsDifficulty);
+        quizModel.setTabZero(gameScreenButton, statsButton, aboutButton, settingsButton);
         quizView.hideModals();
         quizView.showNavModal();
       };
     });
   };
+  settingsQuestions.addEventListener('change', function(e){
+    if(e.target.value > 50){
+      e.target.value = 50;
+    }
+    else if(e.target.value < 5){
+      e.target.value = 5;
+    }
+    quizModel.questionAmount = e.target.value;
+  });
+  settingsDifficulty.addEventListener('change', function(e){
+    quizModel.difficulty = e.target.value;
+  })
 };
