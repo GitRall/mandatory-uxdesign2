@@ -20,7 +20,7 @@ export function quizFunc(){
   function init(){
     quizView.init(overlay, nav, statsModal, aboutModal, section);
     quizView.renderStats(quizModel.getStats());
-  }
+  };
 
   init();
 
@@ -31,7 +31,7 @@ export function quizFunc(){
     quizModel.setTabZero(menuIcon, startQuizButton, resultButton, quizInputs, questions);
     quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
     quizView.hideModals();
-  }
+  };
 
   menuIcon.addEventListener('click', function(e){
     let questions = document.querySelectorAll('.section__question');
@@ -57,7 +57,7 @@ export function quizFunc(){
   overlay.addEventListener('keydown', function(e){
     if(e.keyCode === 13){
       hideModals();
-    }
+    };
   });
 
   nav.addEventListener('click', function(e){
@@ -74,10 +74,17 @@ export function quizFunc(){
   });
 
   statsButton.addEventListener('click', function(e){
-    quizModel.setTabZero(statsBackArrow);
     quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
-    quizView.hideNavModal();
-    quizView.showStatsModal();
+    new Promise ((resolve, reject) => {
+      quizView.hideNavModal();
+      quizView.showStatsModal();
+      setTimeout(() => {
+        resolve();
+      }, 300);
+    })
+    .then(() => {
+      quizModel.setTabZero(statsBackArrow);
+    })
   });
   statsButton.addEventListener('keydown', function(e){
     e.stopPropagation();
@@ -90,14 +97,21 @@ export function quizFunc(){
   });
 
   aboutButton.addEventListener('click', function(e){
-    quizModel.setTabZero(aboutBackArrow);
     quizModel.setTabMinus(gameScreenButton, statsButton, aboutButton);
-    quizView.hideNavModal();
-    quizView.showAboutModal();
+    new Promise ((resolve, reject) => {
+      quizView.hideNavModal();
+      quizView.showAboutModal();
+      setTimeout(() => {
+        resolve();
+      }, 300);
+    })
+    .then(() => {
+      quizModel.setTabZero(aboutBackArrow);
+    })
   });
   aboutButton.addEventListener('keydown', function(e){
     e.stopPropagation();
-  })
+  });
   aboutModal.addEventListener('click', function(e){
     e.stopPropagation();
   });
@@ -116,7 +130,7 @@ export function quizFunc(){
         questionCount++;
       }
       let questions = document.querySelectorAll('.section__question');
-      quizModel.setTabZero(questions)
+      quizModel.setTabZero(questions);
     })
     .then(function(){
       let resultButton = quizView.renderResultButton();
@@ -126,25 +140,25 @@ export function quizFunc(){
       for(let input of answerInputs){
         input.addEventListener('click', function(e){
           quizModel.setDataChecked(e.target.parentNode.parentNode);
-        })
-      }
+        });
+      };
 
       resultButton.addEventListener('click', function(e){
+        e.target.blur();
         let check = true;
         for(let element of answerContainers){
           if(!element.dataset.checked){
             element.scrollIntoView({behavior: 'smooth', block: 'center'});
-            element.focus();
             return check = false;
-          }
-        }
+          };
+        };
         if(!check) return;
         let resultArr = [];
         for(let input of answerInputs){
           if(input.checked){
-            resultArr.push(input.parentNode.textContent)
-          }
-        }
+            resultArr.push(input.parentNode.textContent);
+          };
+        };
         let correctAnswers = quizModel.checkResult(resultArr);
         quizView.renderStats(quizModel.getStats());
         let questionAmount = quizModel.getQuestionAmount();
@@ -155,17 +169,16 @@ export function quizFunc(){
         let resultButton = document.querySelector('.section__result-btn');
         quizModel.setTabMinus(menuIcon, questions, quizInputs, resultButton);
         quizModel.setTabZero(dialogModalButtons);
-        e.target.blur();
-      })
+      });
     })
-  }
+  };
 
   for(let btn of dialogModalButtons){
     btn.addEventListener('click', function(e){
       section.innerHTML = '';
       quizView.hideModalDialog();
       if(e.target.classList[1] === 'modal-dialog__restart-btn'){
-        startQuiz()
+        startQuiz();
         window.scrollTo(0, 0);
         menuIcon.focus();
         quizModel.setTabZero(menuIcon);
@@ -175,9 +188,9 @@ export function quizFunc(){
         quizModel.setTabZero(menuIcon);
         window.scrollTo(0, 0);
         menuIcon.focus();
-      }
-    })
-  }
+      };
+    });
+  };
 
   for(let backBtn of modalBackArrows){
     backBtn.addEventListener('click', function(e){
@@ -193,7 +206,7 @@ export function quizFunc(){
         quizModel.setTabZero(gameScreenButton, statsButton, aboutButton);
         quizView.hideModals();
         quizView.showNavModal();
-      }
-    })
-  }
-}
+      };
+    });
+  };
+};

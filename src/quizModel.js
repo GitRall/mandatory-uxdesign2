@@ -43,7 +43,7 @@ export default {
       questionObj.answers.push(answer);
     }
     questionObj.answers.push(obj.correct_answer);
-    questionObj.question = obj.question
+    questionObj.question = obj.question;
     questionObj.answers = this.shuffleArray(questionObj.answers);
     return questionObj;
   },
@@ -81,37 +81,35 @@ export default {
     let percent = correct / amount;
     if(percent <= 0.3) return 'You can do better!';
     else if(percent > 0.3 && percent <= 0.6) return 'Average';
-    else if(percent > 0.6 && percent < 1) return 'Well done!'
+    else if(percent > 0.6 && percent < 1) return 'Well done!';
     else return 'Perfect!';
   },
   setTabMinus: function(...args){
-    console.log(args);
     for(let element of args){
       if(element === null) continue;
       if(element.length > 0){
         let elementArray = Array.from(element);
         for(let item of elementArray){
           item.tabIndex = '-1';
-        }
+        };
       }
       else{
         element.tabIndex = '-1';
-      }
-    }
+      };
+    };
   },
   setTabZero: function(...args){
-    console.log(args);
     for(let element of args){
       if(element === null) continue;
       if(element.length > 0){
         let elementArray = Array.from(element);
         for(let item of elementArray){
           item.tabIndex = '0';
-        }
+        };
       }
       else{
         element.tabIndex = '0';
-      }
-    }
+      };
+    };
   },
-}
+};

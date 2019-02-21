@@ -19,12 +19,10 @@ export default {
     this.statsContainer.setAttribute('aria-live', 'off');
     this.aboutModal.classList.remove('about-modal--visible');
     this.aboutText.setAttribute('aria-live', 'off');
-    document.body.style.overflow = '';
   },
   showNavModal: function(){
     this.overlay.classList.remove('overlay--hidden');
     this.navModal.classList.add('nav--visible');
-    document.body.style.overflow = 'hidden';
   },
   hideNavModal: function(){
     this.navModal.classList.remove('nav--visible');
@@ -48,7 +46,7 @@ export default {
   renderStats: function(stats){
     for(let element of this.statsElements){
       if(element.classList[1] === 'stats-modal__games-played'){
-        element.textContent = stats.games
+        element.textContent = stats.games;
       }
       else if(element.classList[1] === 'stats-modal__correct-answers'){
         element.textContent = stats.correct;
@@ -89,7 +87,7 @@ export default {
       answerLabel.classList.add('section__answer-label');
       answerInput.classList.add('section__answer-input');
       checkmark.classList.add('section__checkmark');
-      checkmarkInner.classList.add('section__checkmark-inner')
+      checkmarkInner.classList.add('section__checkmark-inner');
 
       answerInput.type = 'radio';
       answerInput.name = 'Q' + questionCount;
@@ -112,10 +110,8 @@ export default {
     this.dialogModalTitle.textContent = title;
     this.dialogModalText.textContent = 'You Answered ' + correct + '/' + amount + ' questions correct!';
     this.overlayModal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
   },
   hideModalDialog: function(){
     this.overlayModal.style.display = 'none';
-    document.body.style.overflow = '';
   }
 }
