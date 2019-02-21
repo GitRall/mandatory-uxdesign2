@@ -132,7 +132,9 @@ export function quizFunc(){
   startQuizButton.addEventListener('click', startQuiz);
 
   function startQuiz(e){
+    startQuizButton.blur();
     quizView.hideStartButton(startQuizButton);
+
     quizModel.getQuestions()
     .then(function(data){
       let questionCount = 1;

@@ -34,7 +34,6 @@
     getQuestions: function(){
       return axios.get('https://opentdb.com/api.php?amount=' + this.questionAmount + this.difficulty)
       .then((response) => {
-        console.log(response);
         this.currentQuestions = response.data.results;
         return response.data.results;
       })
@@ -372,7 +371,9 @@
     startQuizButton.addEventListener('click', startQuiz);
 
     function startQuiz(e){
+      startQuizButton.blur();
       quizView.hideStartButton(startQuizButton);
+
       quizModel.getQuestions()
       .then(function(data){
         let questionCount = 1;
